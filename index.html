@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Fundamentals Simulator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #f5f5f5;
+    color: #333;
+  }
+  h1 {
+    text-align: center;
+    color: #4CAF50;
+  }
+  section {
+    background: white;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  input {
+    padding: 5px;
+    margin-right: 5px;
+  }
+  button {
+    margin: 5px 0;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #45a049;
+  }
+  .active {
+    background: yellow;
+    color: red;
+  }
+  ul {
+    list-style-type: square;
+    padding-left: 20px;
+  }
+  .output {
+    margin-top: 10px;
+    padding: 5px;
+    background: #e0e0e0;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+<h1>JavaScript Fundamentals Simulator</h1>
+
+<!-- Part 1: Basics -->
+<section>
+  <h2>Part 1: Variables & Conditionals</h2>
+  <input type="text" id="userName" placeholder="Enter your name">
+  <button onclick="greetUser()">Greet Me</button>
+  <div id="greeting" class="output"></div>
+  <button onclick="checkAge()">Check Age Example</button>
+  <div id="ageCheck" class="output"></div>
+</section>
+
+<!-- Part 2: Functions -->
+<section>
+  <h2>Part 2: Functions</h2>
+  <button onclick="showTotal()">Calculate Total (100 x 3)</button>
+  <div id="totalOutput" class="output"></div>
+  <button onclick="showFormattedName()">Format Name (Elvis Ouma)</button>
+  <div id="nameOutput" class="output"></div>
+</section>
+
+<!-- Part 3: Loops -->
+<section>
+  <h2>Part 3: Loops</h2>
+  <button onclick="showNumbers()">Show Numbers 1–5</button>
+  <ul id="numbersList"></ul>
+  <button onclick="startCountdown()">Start Countdown (5→1)</button>
+  <div id="countdownOutput" class="output"></div>
+</section>
+
+<!-- Part 4: DOM Manipulation -->
+<section>
+  <h2>Part 4: DOM Manipulation</h2>
+  <button id="toggleBtn">Toggle Color</button>
+  <p id="toggleText" class="output">Watch me change!</p>
+  <button onclick="addParagraph()">Add New Paragraph</button>
+  <div id="extraContent" class="output"></div>
+</section>
+
+<script>
+
+  // Part 1: Variables & Conditionals
+
+  function greetUser() {
+    const name = document.getElementById("userName").value;
+    document.getElementById("greeting").textContent =
+      name ? `Hello, ${name}!` : "Please enter your name.";
+  }
+
+  function checkAge() {
+    let age = 18; // variable
+    let result;
+    if(age >= 18){
+      result = "You are an adult.";
+    } else {
+      result = "You are a minor.";
+    }
+    document.getElementById("ageCheck").textContent = result;
+  }
+
+ 
+  // Part 2: Functions
+ 
+  function calculateTotal(price, quantity) {
+    return price * quantity;
+  }
+
+  function showTotal() {
+    const total = calculateTotal(100,3);
+    document.getElementById("totalOutput").textContent = "Total price: " + total;
+  }
+
+  function formatName(first, last) {
+    return first.toUpperCase() + " " + last.toUpperCase();
+  }
+
+  function showFormattedName() {
+    const formatted = formatName("Elvis","Ouma");
+    document.getElementById("nameOutput").textContent = "Formatted Name: " + formatted;
+  }
+
+
+  // Part 3: Loops
+  
+  function showNumbers() {
+    const ul = document.getElementById("numbersList");
+    ul.innerHTML = "";
+    for(let i=1; i<=5; i++){
+      const li = document.createElement("li");
+      li.textContent = "Number " + i;
+      ul.appendChild(li);
+    }
+  }
+
+  function startCountdown() {
+    let countdown = 5;
+    let result = "";
+    while(countdown > 0){
+      result += countdown + " ";
+      countdown--;
+    }
+    document.getElementById("countdownOutput").textContent = "Countdown: " + result;
+  }
+
+  
+  // Part 4: DOM Manipulation
+  
+  document.getElementById("toggleBtn").addEventListener("click", function(){
+    document.getElementById("toggleText").classList.toggle("active");
+  });
+
+  document.getElementById("toggleText").addEventListener("click", function(){
+    this.textContent = "You clicked me!";
+  });
+
+  function addParagraph() {
+    const newP = document.createElement("p");
+    newP.textContent = "This paragraph was added dynamically!";
+    document.getElementById("extraContent").appendChild(newP);
+  }
+</script>
+
+</body>
+</html>
